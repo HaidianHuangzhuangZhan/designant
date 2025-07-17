@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8" />
     <title>被深不可测的伟力所侵...</title>
@@ -19,5 +19,28 @@
             margin: 0 auto 10px;"
         width="500" 
         >
+
+         <!-- 隐藏的音频播放器 - 自动播放并循环 -->
+    <audio id="bgMusic" autoplay loop style="display:none;">
+        <source src="Designant.mp3" type="audio/wav">
+        您的浏览器不支持音频播放。
+    </audio>
+    
+    <script>
+        // 获取音频元素
+        const audio = document.getElementById('bgMusic');
+        
+        // 尝试自动播放
+        audio.play().catch(e => {
+            console.log('自动播放失败:', e);
+            // 可以在这里添加用户提示，如"点击页面播放音乐"
+        });
+        
+        // 处理用户交互后的播放（现代浏览器要求）
+        document.addEventListener('click', function startMusic() {
+            audio.play().catch(e => console.log('交互后播放失败:', e));
+            document.removeEventListener('click', startMusic); // 只执行一次
+        });
+    </script>
 </body>
 </html>
